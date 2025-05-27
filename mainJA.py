@@ -1,18 +1,6 @@
 from speech_utils import speak, listen
 from command_handler import handle_command
-
-TRIGGER_PHRASES = [
-    "jarvis", "hey jarvis", "yo jarvis", "okay jarvis", "hi jarvis",
-    "assistant", "hey assistant", "yo assistant", "wake up", "hello there"
-    "Blue Bus", "Bot", "Open"]
-
-EXIT_PHRASES = [
-    "goodbye", "shutdown", "exit", "sleep", "quit", "stop", "bye",
-    "power down", "shut yourself down", "see you later",
-    "that's enough", "terminate", "end session", "you can rest now",
-    "take a break", "go to sleep"
-]
-
+from command_aliases import TRIGGER_PHRASES, EXIT_PHRASES
 speak("Say wake word to begin.")
 
 while True:

@@ -4,7 +4,6 @@ import pyaudio
 import audioop
 
 engine = pyttsx3.init()
-
 def speak(text):
     print("Bot:", text)
     engine.say(text)
