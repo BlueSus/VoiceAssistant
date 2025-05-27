@@ -10,8 +10,6 @@ def wait_for_trigger(trigger_word="jarvis", mic_index=46, sample_rate=48000, dur
     stream = p.open(format=format, channels=channels, rate=sample_rate,
                     input=True, input_device_index=mic_index,
                     frames_per_buffer=chunk)
-
-
     frames = []
     for _ in range(int(sample_rate / chunk * duration)):
         data = stream.read(chunk)
