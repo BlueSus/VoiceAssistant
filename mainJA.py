@@ -1,7 +1,10 @@
+import threading
 from speech_utils import speak, listen
 from command_handler import handle_command
 from command_aliases import TRIGGER_PHRASES, EXIT_PHRASES
 from dotenv import load_dotenv
+from features import reminder_manager
+threading.Thread(target=reminder_manager.reminder_loop, args=(speak,), daemon=True).start()
 load_dotenv()
 speak("Say wake word to begin.")
 

@@ -5,15 +5,19 @@ import audioop
 import os
 import uuid
 import requests
+import re
 from pydub import AudioSegment
 from pydub.playback import play
 from dotenv import load_dotenv
 load_dotenv()
 
 engine = pyttsx3.init()
+def safe_filename(text):
+    sanitized = re.sub(r'[\\/*?:"<>|\n\r\'¥]', '_', text)
+    return sanitized[:50] if len(sanitized) > 50 else sanitized
 def speak(text):
     print("Bot:", text)
-    file_safe = text.replace(" ", "_").replace(":", "").lower()[:40]
+    file_safe = safe_filename(text)
     file_path = f"voice_cache/{file_safe}.mp3"
     if os.path.exists(file_path):
         sound = AudioSegment.from_file(file_path, format="mp3")
