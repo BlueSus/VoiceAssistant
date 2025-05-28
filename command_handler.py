@@ -1,8 +1,8 @@
-from features import system_control, time_weather
+from features import system_control, time_weather, open_app, reminder_manager
+from features.media_controls import mute, unmute, get_volume, set_volume
 from speech_utils import speak
 from command_aliases import ALIASES
-from features import open_app
-from features import reminder_manager
+from features import spotify_control
 COMMAND_LOOKUP = {alias: cmd for cmd, aliases in ALIASES.items() for alias in aliases}
 def resolve_alias(cmd):
     return COMMAND_LOOKUP.get(cmd, cmd)
@@ -10,6 +10,11 @@ def handle_command(cmd):
     if not cmd:
         return
     base_command = resolve_alias(cmd)
+    if base_command in [
+        "pause music","play music","next song","previous song","volume up","volume down","mute","unmute"
+    ]:
+        handle_media_command(base_command)
+        return
     if "time" in cmd:
         time_weather.get_time()
         return
@@ -33,4 +38,23 @@ def handle_command(cmd):
         return
     if system_control.handle(cmd):
         return
-    speak(f"Command not recognized: {cmd}")
+    speak(f"Command not recognized")
+def handle_media_command(command):
+    if "pause music" in command:
+        spotify_control.pause()
+    elif "play music" in command:
+        spotify_control.play()
+    elif "next song" in command:
+        spotify_control.next_track()
+    elif "previous song" in command:
+        spotify_control.previous_track()
+    elif "mute" in command:
+        mute()
+    elif "unmute" in command:
+        unmute()
+    elif "volume up" in command:
+        new_vol = min(get_volume() + 0.1, 1.0)
+        set_volume(new_vol)
+    elif "volume down" in command:
+        new_vol = max(get_volume() - 0.1, 0.0)
+        set_volume(new_vol)

@@ -45,6 +45,16 @@ APP_ALIASES = {
     "magnifier": "magnify.exe",
     "narrator": "narrator.exe"
 }
+ALIASES.update({
+    "pause music": ["pause song", "pause audio", "pause playback", "stop music"],
+    "play music": ["resume music", "continue song", "start music", "play song"],
+    "next song": ["skip", "next track"],
+    "previous song": ["go back", "last song", "previous track"],
+    "volume up": ["increase volume", "louder"],
+    "volume down": ["decrease volume", "quieter", "lower volume"],
+    "mute": ["mute sound", "turn off volume"],
+    "unmute": ["unmute sound", "turn on volume"]
+})
 COMMAND_LOOKUP = {
     alias: command for command, aliases in ALIASES.items() for alias in aliases
 }
