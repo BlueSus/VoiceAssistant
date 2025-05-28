@@ -1,6 +1,8 @@
 from speech_utils import speak, listen
 from command_handler import handle_command
 from command_aliases import TRIGGER_PHRASES, EXIT_PHRASES
+from dotenv import load_dotenv
+load_dotenv()
 speak("Say wake word to begin.")
 
 while True:
